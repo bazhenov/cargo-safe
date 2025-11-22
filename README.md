@@ -22,14 +22,39 @@ $ cargo safe run
 
 Or any other cargo command.
 
-## What is allowed inside sandoxed environment
+# What is allowed inside sandoxed environment
 
-- reading and writing OS temporary directory
-- outbound network activity to ports 80/443
-- listing of files (but not their content)
-- reading all files listed in `PATH` env variable (to run system binaries)
-- writing to a separate `cargo` and `target` directiories in a private sandbox
-- writing to `/dev/null` and some other system files.
-- reading from `/dev/random`, `/dev/tty` and some other system files
+## Read access
+
+Sandobx allow access to list all files (without reading their content), and read/execute following files and directories:
+
+ - `/dev/random` and `/dev/urandom`
+ - `/dev/tty`
+ - All files in `PATH` directiories
+ - All files in following directories (and subdirectories):
+    - `/private/etc/`
+    - `/private/var/db/timezone/`
+    - `/Applications/Xcode.app/Contents/Developer`
+    - `/usr/lib/`
+    - `/usr/lib/info/`
+    - `/private/var/db/dyld/`
+    - `/System/Library/Frameworks/`
+    - `/System/Library/PrivateFrameworks/`
+    - `/System/Library/`
+    - `/System/Volumes/Preboot/Cryptexes/OS`
+    - `/System/Cryptexes/OS/`
+    - `/Library/Preferences/`
+
+
+## Write access
+
+ - OS temporary directory
+ - `cargo` and `target` directories private to a sandbox (separate from `$HOME/.cargo` and `target` in your workdir)
+ - `Cargo.lock` in your project directory – otherwise it's impossible to build a project
+
+## Network access
+
+ - communication over `/private/var/run/mDNSResponder` – to allow DNS lookups
+ - outbound network connections to ports 80/443 - to download crates
 
 Full list of permissions can be found in sources.
