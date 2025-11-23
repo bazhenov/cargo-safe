@@ -119,7 +119,7 @@ fn prepare_profile(workspace: &Path, sandbox: &Path) -> Result<Profile, io::Erro
     if let Some(workspace_dir) = workspace.to_str().map(|s| s.to_owned()) {
         // Allowing to write Cargo.lock
         rules.push(allow(
-            FileWriteAll,
+            FileWriteCreate,
             vec![Literal(format!("{}/Cargo.lock", &workspace_dir))],
         ));
         rules.push(allow(FileReadAll, vec![Prefix(workspace_dir)]));
@@ -212,6 +212,7 @@ mod seatbelt {
         Default,
         FileAll,
         FileWriteAll,
+        FileWriteCreate,
         FileReadAll,
         FileIoctl,
         IpcPosixShmReadData,
@@ -236,6 +237,7 @@ mod seatbelt {
                 Operation::Default => "default",
                 Operation::FileAll => "file*",
                 Operation::FileWriteAll => "file-write*",
+                Operation::FileWriteCreate => "file-write-create",
                 Operation::FileReadAll => "file-read*",
                 Operation::FileIoctl => "file-ioctl",
                 Operation::IpcPosixShmReadData => "ipc-posix-shm-read-data",
