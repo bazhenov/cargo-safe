@@ -4,7 +4,7 @@
 
 # Problem
 
-Supply chain attacks became very common thing these days, but we're still running untrusted code on our machines everyday. This crate provides `cargo safe` subcommand, that runs all commands in a sandboxed environment.
+Supply chain attacks became very common thing these days, but we're still running untrusted code on our machines everyday. This crate provides `safe-cargo` subcommand, that runs all commands in a sandboxed environment.
 
 For now it is working on macOS only using Apple's sandboxing mechanism.
 
@@ -13,15 +13,15 @@ For now it is working on macOS only using Apple's sandboxing mechanism.
 ## Installation
 
 ```console
-$ cargo install cargo-safe
+$ cargo install safe-cargo
 ```
 
 Using is pretty simple, you can use any `cargo` command:
 
 ```console
-$ cargo safe buld
-$ cargo safe test
-$ cargo safe run
+$ safe-cargo buld
+$ safe-cargo test
+$ safe-cargo run
 ```
 
 Or any other cargo command.
