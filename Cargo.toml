@@ -5,8 +5,8 @@ edition = "2024"
 authors = ["Denis Bazhenov <dotsid@gmail.com>"]
 categories = ["development-tools::cargo-plugins"]
 description = "Build and runs code in a sandboxed environment"
-repository = "https://github.com/bazhenov/cargo-safe"
-documentation = "https://github.com/bazhenov/cargo-safe"
+repository = "https://github.com/bazhenov/safe-cargo"
+documentation = "https://github.com/bazhenov/safe-cargo"
 keywords = ["cargo", "subcommand"]
 license = "MIT OR Apache-2.0"
 
